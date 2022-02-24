@@ -12,31 +12,6 @@
 
 #include <unistd.h>
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i])
-	{
-		dest[i] = src[i];
-		i++;
-	}
-	dest[i] = 0;
-	return (dest);
-}
-
-void	ft_swap(char *tab1, char *tab2)
-{
-	char	temp[100];
-	int		i;
-
-	i = 0;
-	*temp = *tab1;
-	*tab1 = *tab2;
-	*tab2 = *temp;
-}
-
 int	ft_strcmp(char *s1, char *s2)
 {
 	while (*s1 || *s2)
@@ -63,29 +38,26 @@ void	ft_putstr(char *str)
 
 int	main(int ac, char **av)
 {
+	char	*temp;
 	int		i;
 	int		j;
-	int		min;
-	char	temp[100];
 
-	(void)ac;
-	i = 1;
-	j = 1;
-	min = 1;
-	while (av[i])
+	i = 0;
+	while (av[i] != 0)
 	{
-		while (av[j])
+		j = i;
+		while (av[j] != 0)
 		{
 			if (ft_strcmp(av[i], av[j]) > 0)
-				min = j;
+			{
+				temp = av[i];
+				av[i] = av[j];
+				av[j] = temp;
+			}
 			j++;
 		}
-		ft_swap(av[i],av[min]);
 		ft_putstr(av[i]);
-		write(1, "\n", 1);
+		ft_putstr("\n");
 		i++;
-		j = i;
-		min = i;
 	}
-	return (0);
 }
